@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React, {useContext} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,15 +17,17 @@ import Button from '@mui/material/Button';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import { useSearchParams } from "react-router-dom";
+import CartContext from '../../context/cart';
 
 
 const drawerWidth = 240;
 const navItems = ["All","Electronics", "Jewelery", "men's clothing","Women's clothing"];
 
 function BarsApp(props) {
+  const {cart, setCart} = useContext(CartContext);
+  
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [cart, setCart] = React.useState(1)
   let [searchParams, setSearchParams] = useSearchParams();
 
   const handleDrawerToggle = () => {
