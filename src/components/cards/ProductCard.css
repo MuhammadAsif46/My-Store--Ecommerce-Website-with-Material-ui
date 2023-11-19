@@ -16,9 +16,9 @@
 }
 
 .cart-img{
-    width: 100%;
-    height: 240;
-    object-fit: contain;
+    width: 100% !important;
+    height: 240 !important;
+    object-fit: contain !important;
 }
 
 .card-detail-btn{

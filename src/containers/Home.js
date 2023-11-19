@@ -3,20 +3,18 @@ import ProductCard from "../components/cards/ProductCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BasicModal from "../components/modal/BasicModal";
-import { useLocation } from "react-router-dom";
 
 function Home(){
 
     const [products, setProducts] = useState([]);
     const [open, setOpen] = useState(false);
     const [detail, setDetail] = useState({});
-    let location = useLocation();
     
     useEffect(()=>{
       axios('https://fakestoreapi.com/products')
       .then((res)=>setProducts(res.data))
       .catch((err)=>console.log(err))
-    },[location]);
+    },[]);
 
     const viewDetails = (id)=>{
       axios(`https://fakestoreapi.com/products/${id}`)
