@@ -9,6 +9,13 @@ import ReactStars from 'react-stars';
 import "./ProductCard.css";
 
 export default function ProductCard({products, viewDetails}) {
+
+  const addToCard = () => {
+    const cart = JSON.parse(localStorage.getItem("card")) || [];
+    cart.push(products.id);
+    localStorage.setItem("card", JSON.stringify(cart));
+    console.log("cart --", cart);
+  }
   return (
     <Card sx={{ width: 270, marginTop: 4, position: "relative", paddingBottom: 5 }}>
       <div>
@@ -30,7 +37,7 @@ export default function ProductCard({products, viewDetails}) {
         
       </CardContent>
       <CardActions className='card-btns'>
-        <Button className='cart-btn' size="small">ADD TO CART</Button>
+        <Button onClick={addToCard} className='cart-btn' size="small">ADD TO CART</Button>
         <Button className='card-detail-btn' size="small" onClick={()=>viewDetails(products.id)}>VIEW DETAILS </Button>
       </CardActions>
     </Card>

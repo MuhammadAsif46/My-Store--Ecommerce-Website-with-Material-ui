@@ -14,9 +14,12 @@ function Home(){
     let [searchParams, setSearchParams] = useSearchParams();
     
     useEffect(()=>{
-      axios('https://fakestoreapi.com/products')
-      .then((res)=>setProducts(res.data))
-      .catch((err)=>console.log(err))
+      const category = searchParams.get("category");
+      if(!category || category === "all"){
+         axios('https://fakestoreapi.com/products')
+         .then((res)=>setProducts(res.data))
+         .catch((err)=>console.log(err))
+      }
     },[searchParams]);
 
     useEffect(()=>{

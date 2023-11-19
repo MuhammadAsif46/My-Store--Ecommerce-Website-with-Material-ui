@@ -10,11 +10,14 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-// import MenuIcon from '@mui/icons-material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import ShoppingCart from '@mui/icons-material/ShoppingCart';
+import Badge from '@mui/material/Badge';
 import { useSearchParams } from "react-router-dom";
+
 
 const drawerWidth = 240;
 const navItems = ["All","Electronics", "Jewelery", "men's clothing","Women's clothing"];
@@ -22,11 +25,17 @@ const navItems = ["All","Electronics", "Jewelery", "men's clothing","Women's clo
 function BarsApp(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [cart, setCart] = React.useState(1)
   let [searchParams, setSearchParams] = useSearchParams();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  React.useEffect(()=>{
+    const cart = JSON.parse(localStorage.getItem("card")) || [];
+    setCart(cart.length);
+  },[])
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
@@ -36,7 +45,7 @@ function BarsApp(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} style={{fontWeight: "bold"}}  disablePadding>
+          <ListItem onClick={()=>setSearchParams({category: item.toLowerCase()})} key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -60,7 +69,7 @@ function BarsApp(props) {
             onClick={handleDrawerToggle}
             sx={{ mr: 2, display: { sm: 'none' } }}
           >
-            {/* <MenuIcon /> */}
+            <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
@@ -75,6 +84,17 @@ function BarsApp(props) {
                 {item}
               </Button>
             ))}
+          </Box>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <IconButton
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit"
+        >
+          <Badge badgeContent={cart} color="error">
+            <ShoppingCart />
+          </Badge>
+        </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
