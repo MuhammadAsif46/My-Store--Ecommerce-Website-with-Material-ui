@@ -6,10 +6,13 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+// import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+// import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+// import SkipNextIcon from '@mui/icons-material/SkipNext';
 import ReactStars from 'react-stars';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+
 
 export default function MediaControlCard({detail}) {
   const theme = useTheme();
@@ -36,6 +39,17 @@ export default function MediaControlCard({detail}) {
         value={detail.rating.rate}
         size={30}
         color2={'#ffd700'} />
+        <div style={{marginTop: 10, marginBottom: 10 }}>
+            <Chip label={detail.category}/>
+        </div>
+        <Typography variant="h6" component="div">
+          Rs {detail.price} /-
+          </Typography>
+          <div style={{marginTop: 10}}>
+          <Button className='cart-btn' size="small">ADD TO CART</Button>
+          <Button style={{marginLeft:5}} className='card-detail-btn' size="small">BUT NOW </Button>
+          </div>
+
         </CardContent>
        
       </Box>

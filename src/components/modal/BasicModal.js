@@ -13,6 +13,7 @@ const style = {
   bgcolor: 'background.paper',
   border: '2px solid #8bc34a',
   boxShadow: 24,
+//   borderRadius: 20
 };
 
 export default function BasicModal({ detail, open, handleClose}) {
