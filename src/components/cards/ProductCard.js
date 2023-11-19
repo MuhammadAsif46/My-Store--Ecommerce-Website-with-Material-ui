@@ -10,7 +10,7 @@ import "./ProductCard.css";
 
 export default function ProductCard({products, viewDetails}) {
   return (
-    <Card sx={{ width: 250, marginTop: 4, position: "relative", paddingBottom: 5 }}>
+    <Card sx={{ width: 270, marginTop: 4, position: "relative", paddingBottom: 5 }}>
       <div>
         <img className="cart-img" src={products.image} alt="" />
       </div>
