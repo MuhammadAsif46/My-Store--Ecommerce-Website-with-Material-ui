@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { useSearchParams } from "react-router-dom";
 
 const drawerWidth = 240;
 const navItems = ["Electronics", "Jewelery", "men's clothing","Women's clothing"];
@@ -21,6 +22,8 @@ const navItems = ["Electronics", "Jewelery", "men's clothing","Women's clothing"
 function BarsApp(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  let [searchParams, setSearchParams] = useSearchParams();
+  
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -29,12 +32,12 @@ function BarsApp(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        SMIT STORE
+        MY STORE
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item} style={{fontWeight: "bold"}}  disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -65,11 +68,11 @@ function BarsApp(props) {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            SMIT STORE
+            MY STORE
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
+              <Button onClick={()=>setSearchParams({category: item.toLowerCase()})} key={item} sx={{ color: '#fff' }}>
                 {item}
               </Button>
             ))}
