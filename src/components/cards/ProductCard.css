@@ -1,0 +1,29 @@
+.cart-btn{
+    background-color: #8bc34a !important;
+    color: #fff !important;
+    font-weight: bold !important;
+    padding: 5px 5px !important;
+    
+}
+
+.card-btns{
+    width: 100% ;
+    display: flex !important;
+    justify-content: space-between !important;
+    position: absolute !important;
+    bottom: 10px !important;
+
+}
+
+.cart-img{
+    width: 100%;
+    height: 240;
+    object-fit: contain;
+}
+
+.card-detail-btn{
+    background-color: #fff !important;
+    color: #8bc34a !important;
+    padding: 5px 5px !important;
+    border: 1px solid #8bc34a !important;
+}
