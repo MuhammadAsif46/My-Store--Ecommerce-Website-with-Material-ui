@@ -3,18 +3,30 @@ import ProductCard from "../components/cards/ProductCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import BasicModal from "../components/modal/BasicModal";
+import { useSearchParams } from "react-router-dom";
+
 
 function Home(){
 
     const [products, setProducts] = useState([]);
     const [open, setOpen] = useState(false);
     const [detail, setDetail] = useState({});
+    let [searchParams, setSearchParams] = useSearchParams();
     
     useEffect(()=>{
       axios('https://fakestoreapi.com/products')
       .then((res)=>setProducts(res.data))
       .catch((err)=>console.log(err))
-    },[]);
+    },[searchParams]);
+
+    useEffect(()=>{
+      const category = searchParams.get("category");
+      if(category && category !== "all"){
+         axios(`https://fakestoreapi.com/products/category/${category}`)
+         .then((res)=>setProducts(res.data))
+         .catch((err)=>console.log(err))
+      }
+    },[searchParams])
 
     const viewDetails = (id)=>{
       axios(`https://fakestoreapi.com/products/${id}`)

@@ -17,13 +17,12 @@ import Button from '@mui/material/Button';
 import { useSearchParams } from "react-router-dom";
 
 const drawerWidth = 240;
-const navItems = ["Electronics", "Jewelery", "men's clothing","Women's clothing"];
+const navItems = ["All","Electronics", "Jewelery", "men's clothing","Women's clothing"];
 
 function BarsApp(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
-  
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
