@@ -1,4 +1,4 @@
-import  React, {useContext} from 'react';
+import  React, {useContext, useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,6 +18,7 @@ import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
 import { useSearchParams } from "react-router-dom";
 import CartContext from '../../context/cart';
+import DrawerRight from '../drawer/DrawerRight';
 
 
 const drawerWidth = 240;
@@ -27,16 +28,38 @@ function BarsApp(props) {
   const {cart, setCart} = useContext(CartContext);
   
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   let [searchParams, setSearchParams] = useSearchParams();
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  React.useEffect(()=>{
-    const cart = JSON.parse(localStorage.getItem("card")) || [];
-    setCart(cart.length);
+  const deleteCart = (id)=>{
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cartData.findIndex(v => v.id === id);
+    cartData.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cartData));
+    setCart(cartData);
+  }
+
+  const updateQty = (type, id)=>{
+    const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cartData.findIndex(v => v.id === id);
+    if(type === "+"){
+      cartData.splice(index, 1,{ ...cartData[index], qty: cartData[index].qty + 1})
+    }else{
+      cartData.splice(index, 1,{ ...cartData[index], qty: cartData[index].qty - 1})
+    }
+    localStorage.setItem("cart", JSON.stringify(cartData));
+    setCart(cartData);
+  }
+
+
+  useEffect(()=>{
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(cart);
   },[])
 
   const drawer = (
@@ -89,15 +112,17 @@ function BarsApp(props) {
           </Box>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           <IconButton
+          onClick={()=>setOpen(true)}
           size="large"
           aria-label="show 17 new notifications"
           color="inherit"
         >
-          <Badge badgeContent={cart} color="error">
+          <Badge badgeContent={cart.length} color="error">
             <ShoppingCart />
           </Badge>
         </IconButton>
           </Box>
+          <DrawerRight updateQty={updateQty} deleteCart={deleteCart} cardData={cart} open={open} setOpen={setOpen}/>
         </Toolbar>
       </AppBar>
       <nav>

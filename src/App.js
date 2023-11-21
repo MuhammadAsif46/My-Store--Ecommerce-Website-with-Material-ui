@@ -1,15 +1,20 @@
-import Home from "./containers/Home";
 import "./App.css";
 import CartContext from "./context/cart";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import Router from "./routes/Router";
 
 function App() {
-  const [cart, setCart] = useState(0);
+  const [cart, setCart] = useState([]);
+
+  useEffect(()=>{
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    setCart(cart)
+  },[])
 
   return (
     <div>
       <CartContext.Provider value={{cart,setCart}}>
-        <Home />
+        <Router />
       </CartContext.Provider>
     </div>
   );

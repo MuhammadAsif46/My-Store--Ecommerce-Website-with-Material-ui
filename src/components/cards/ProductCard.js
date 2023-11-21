@@ -21,9 +21,14 @@ export default function ProductCard({products, viewDetails}) {
 
   const addToCart = () => {
     const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-    cartData.push(products.id)
+    const index = cartData.findIndex(v => v.id === products.id);
+    if(index !== -1){
+      cartData.splice(index, 1,{ ...cartData[index], qty: cartData[index].qty + 1})
+    }else{
+      cartData.push({...products, qty:1})
+    }
     localStorage.setItem("cart", JSON.stringify(cartData));
-    setCart(cartData.length);
+    setCart(cartData);
     setOpen(true);
   }
   return (
