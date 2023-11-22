@@ -1,29 +1,13 @@
 import BarsApp from "../components/bars/BarsApp";
 import TextField from "@mui/material/TextField";
-
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import {styled} from "@mui/system";
 
-const useStyles = styled({
-    root: {
-        '& label.Mui-focused':{
-            color: '#8bc34a',
-        },
-        '& .MuiInput-underline:after':{
-            borderBottomColor : '#8bc34a'
-        },
-        '& .MuiOutlineInput-root':{ 
-            '&.Mui-focused fieldset':{
-            borderBottomColor : '#8bc34a'
-        },
-        },
-    }
-})
+
+
 
 function CheckOut() {
-    const classes = useStyles()
   return (
     <div>
       <BarsApp />
@@ -33,7 +17,7 @@ function CheckOut() {
             <h1 style={{ textAlign: "center" }}>CheckOut</h1>
           </Grid>
           <Grid item xs={6}>
-            <TextField className={classes.root}
+            <TextField 
               style={{ width: "100%" }}
               id="outlined-basic"
               label="FullName"
@@ -41,8 +25,9 @@ function CheckOut() {
             />
           </Grid>
           <Grid item xs={6}>
+
             <TextField
-              style={{ width: "100%" }}
+              style={{ width: "100%"}}
               id="outlined-basic"
               label="Phone"
               variant="outlined"

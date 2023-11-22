@@ -71,11 +71,7 @@ function BarsApp(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem onClick={()=>{
-            navigate(`/?category=${item.toLowerCase()}`,{
-
-            })
-            }} key={item} disablePadding>
+          <ListItem onClick={()=>setSearchParams({category: item.toLowerCase()})} key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -110,7 +106,9 @@ function BarsApp(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button onClick={()=>setSearchParams({category: item.toLowerCase()})} key={item} sx={{ color: '#fff' }}>
+              <Button onClick={()=>{
+                navigate(`/?category=${item.toLowerCase()}`)}}
+                 key={item} sx={{ color: '#fff' }}>
                 {item}
               </Button>
             ))}
