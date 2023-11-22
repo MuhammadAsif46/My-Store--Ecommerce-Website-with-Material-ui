@@ -3,11 +3,36 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { useState, useContext } from "react";
+import CartContext from "../context/cart";
+import axios from "axios";
 
 
 
 
 function CheckOut() {
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const {cart} = useContext(CartContext)
+
+
+  const placeOrder = () => {
+    const user = {
+      name: userName,
+      email: email,
+      phone: phone,
+      address: address
+    }
+    axios.post("http://localhost:5000/api/v1/order",{
+      user,
+      cart
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+  }
+
   return (
     <div>
       <BarsApp />
@@ -17,7 +42,7 @@ function CheckOut() {
             <h1 style={{ textAlign: "center" }}>CheckOut</h1>
           </Grid>
           <Grid item xs={6}>
-            <TextField 
+            <TextField value={userName} onChange={(e) => setUserName(e.target.value)}
               style={{ width: "100%" }}
               id="outlined-basic"
               label="FullName"
@@ -26,7 +51,7 @@ function CheckOut() {
           </Grid>
           <Grid item xs={6}>
 
-            <TextField
+            <TextField value={phone} onChange={(e)=>setPhone(e.target.value)}
               style={{ width: "100%"}}
               id="outlined-basic"
               label="Phone"
@@ -34,7 +59,7 @@ function CheckOut() {
             />
           </Grid>
           <Grid item xs={6}>
-            <TextField
+            <TextField value={email} onChange={(e)=>setEmail(e.target.value)}
               style={{ width: "100%" }}
               id="outlined-basic"
               label="Email"
@@ -42,7 +67,7 @@ function CheckOut() {
             />
           </Grid>
           <Grid item xs={6}>
-            <TextField
+            <TextField value={address} onChange={(e)=>setAddress(e.target.value)}
               sx={{ input: { border: "red" } }}
               style={{ width: "100%" }}
               id="outlined-basic"
@@ -52,6 +77,7 @@ function CheckOut() {
           </Grid>
           <Grid item xs={12}>
             <Button
+              onClick={placeOrder}
               style={{ width: "100%", marginTop: 15 }}
               className="cart-btn"
               size="small"
