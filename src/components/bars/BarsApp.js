@@ -16,7 +16,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams , useNavigate} from "react-router-dom";
 import CartContext from '../../context/cart';
 import DrawerRight from '../drawer/DrawerRight';
 
@@ -30,6 +30,7 @@ function BarsApp(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
 
   const handleDrawerToggle = () => {
@@ -70,7 +71,11 @@ function BarsApp(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem onClick={()=>setSearchParams({category: item.toLowerCase()})} key={item} disablePadding>
+          <ListItem onClick={()=>{
+            navigate(`/?category=${item.toLowerCase()}`,{
+
+            })
+            }} key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
