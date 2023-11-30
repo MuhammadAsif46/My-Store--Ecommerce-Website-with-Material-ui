@@ -21,7 +21,7 @@ export default function MediaControlCard({detail}) {
     <Card sx={{ display: 'flex' }}>
         <CardMedia
         component="img"
-        sx={{ width: 350, objectFit:"contain" }}
+        sx={{ width: { xs: 100, sm: 200, md: 300, lg: 400 }, objectFit:"contain" }}
         image={detail.image}
         alt="Live from space album cover"
       />

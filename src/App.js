@@ -4,7 +4,7 @@ import { useState,useEffect } from "react";
 import Router from "./routes/Router";
 
 function App() {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState([]); //context state
 
   useEffect(()=>{
     const cart = JSON.parse(localStorage.getItem('cart')) || [];

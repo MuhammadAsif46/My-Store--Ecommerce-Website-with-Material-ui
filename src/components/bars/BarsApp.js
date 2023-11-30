@@ -1,4 +1,12 @@
+// Import react and react router:
 import  React, {useContext, useState, useEffect} from 'react';
+import { useSearchParams , useNavigate} from "react-router-dom";
+import CartContext from '../../context/cart';
+
+// Import data form file:
+import DrawerRight from '../drawer/DrawerRight';
+
+// Import AppBar from material Ui:
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -16,9 +24,6 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import Badge from '@mui/material/Badge';
-import { useSearchParams , useNavigate} from "react-router-dom";
-import CartContext from '../../context/cart';
-import DrawerRight from '../drawer/DrawerRight';
 
 
 const drawerWidth = 240;
@@ -30,6 +35,7 @@ function BarsApp(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  
   const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -68,6 +74,7 @@ function BarsApp(props) {
       <Typography variant="h6" sx={{ my: 2 }}>
         MY STORE
       </Typography>
+      
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -78,6 +85,10 @@ function BarsApp(props) {
           </ListItem>
         ))}
       </List>
+      <Badge badgeContent={cart.length} color="error">
+        <ShoppingCart />
+      </Badge>
+      <DrawerRight updateQty={updateQty} deleteCart={deleteCart} cardData={cart} open={open} setOpen={setOpen}/>
     </Box>
   );
 

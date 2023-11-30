@@ -34,7 +34,7 @@ export default function ProductCard({products, viewDetails}) {
   return (
     <Card sx={{ width: 270, marginTop: 4, position: "relative", paddingBottom: 5 }}>
       <div>
-        <img className="cart-img" src={products.image} alt="" />
+        <img className="cart-img" style={{height:"300px"}} src={products.image} alt=""/>
       </div>
       <CardContent>
       <Snackbar anchorOrigin={{horizontal:"right",vertical: "bottom"}} open={open} autoHideDuration={2000} onClose={()=>setOpen(false)}>
